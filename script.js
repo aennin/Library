@@ -34,9 +34,45 @@ function displayBooks() {
         card.innerHTML = `<h3>${book.title}</h3>
         <p><strong>Author: </strong>${book.author}</p>
         <p><strong>Pages: </strong>${book.pages}</p>
-        <p><strong>Status: </strong>${book.hasRead? "already read" : "not read yet"}</p>`;
+        <p class="status"><strong>Status: </strong>${book.hasRead? "already read" : "not read yet"}</p>`;
 
+        const delBtn = document.createElement("button");
+        delBtn.classList.add("delete-book");
+        delBtn.textContent = "X";
+
+        //Delete logic
+        delBtn.addEventListener("click", () => {
+            const index = myLibrary.findIndex(b => b.id === book.id)
+            if (index !== -1) {
+                myLibrary.splice(index, 1);
+                displayBooks();
+            }
+
+        })
+        // Toggle button
+        const togglebtn = document.createElement("button");
+        togglebtn.textContent = "Change Status";
+        togglebtn.addEventListener("click", () => {
+            book.hasRead = !book.hasRead;
+            displayBooks()
+        })
+        // Status paragraph for dynamic styling
+        const statusPara = card.querySelector(".status")
+        statusPara.classList.add("read-status");
+
+        if(book.hasRead) {
+            statusPara.classList.add("read");
+        } else {
+            statusPara.classList.add("not-read");
+        }
+
+
+
+        card.appendChild(delBtn);
+        card.appendChild(statusPara);
+        card.appendChild(togglebtn);
         container.appendChild(card);
+        
     })
 }
 
@@ -47,6 +83,27 @@ newBookBtn.addEventListener("click", () => {
     // Toggle form visibility
     form.style.display = form.style.display === "none" ? "block" : "none";
 });
+
+// Handle form submission
+form.addEventListener("submit", (e) =>{
+    e.preventDefault();
+
+    const title = document.getElementById("title").value.trim();
+    const author = document.getElementById("author").value.trim();
+    const pages = parseInt(document.getElementById("pages").value);
+    const hasRead = document.getElementById("hasRead").checked;
+
+    if (title && author && !isNaN(pages)) {
+        addBookToLibrary(title, author, pages, hasRead);
+        displayBooks();
+        form.reset();
+        form.style.display = "none"; // Hide form again
+    } else {
+        alert("Please fill in all fields correctly.");
+    }
+});
+
+
 
 //Sample books
 addBookToLibrary("To Kill a Mockingbird", "Harper Lee", 281, false);
