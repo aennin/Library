@@ -12,21 +12,31 @@
     <button class="new-book">Add New Book</button>
 
     <!-- Hidden form -->
-     <form id="book-form" style="display: none;">
-        <input type="text" id="title" placeholder="Title" required>
-        <input type="text" id="author" placeholder="Author" required>
-        <input type="number" id="pages" placeholder="Pages" required>
-        <label>
-            <input type="checkbox" id="hasRead"> Read?
-        </label>
+     <form id="book-form" style="display: none;" novalidate>
+        <div class="form-group">
+            <input type="text" id="title" placeholder="Title" required>
+        </div>
+
+        <div class="form-group">
+            <input type="text" id="author" placeholder="Author" required>
+        </div>
+        
+        <div class="form-group">
+            <input type="number" id="pages" placeholder="Pages" required>
+        </div>
+
+        <div class="form-group">
+            <label>
+                <input type="checkbox" id="hasRead"> Read?
+            </label>
+        </div>
+        
         <button type="submit">Add Book</button>
 
-     </form>
+    </form>
+
     <div id="book-container" class="book-container"></div>
 
-
-
-    <script src="script.js"></script>
-    
+    <script src="script.js"></script>   
 </body>
 </html>
