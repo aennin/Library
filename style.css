@@ -68,3 +68,18 @@ body {
   .not-read {
     background-color: rgb(236, 140, 140);
   }
+
+  .error {
+    color: red;
+    font-size: 0.8em;
+    margin-bottom: 5px;
+    display: block;
+  }
+
+  .form-group {
+    margin-bottom: 10px;
+  }
+
+  #title {
+    margin-top: 10px;
+  }
